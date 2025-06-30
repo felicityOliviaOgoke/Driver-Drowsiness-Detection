@@ -13,26 +13,21 @@ The residual block used in ResNet-50 is called the Bottleneck Residual Block. Th
 
 source : https://blog.roboflow.com/what-is-resnet-50/#:~:text=ResNet%2D50%20is%20CNN%20architecture,efficiency%20in%20image%20classification%20tasks.
 
-+-------------------+           +------------------+
-|      CPU          |           |   Device (tpu)   |
-|-------------------|           |------------------|
-|  Load image       |  ----->   | Run model.forward|
-|  Resize, normalize|           | Backprop         |
-+-------------------+           +------------------+
-          ↑                              |
-          |         optimizer.step()     ↓
-          +-----------------------------+
 
 
 
 from : https://docs.pytorch.org/vision/main/models/generated/torchvision.models.resnet50.html
+
+
 transform = transforms.Compose([
         transforms.Resize((224, 224)), 
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406],
                              [0.229, 0.224, 0.225])   
     ])
-    
+
+![image](https://github.com/user-attachments/assets/c75adb97-6919-4e1f-aa15-c957b5d08b29)
+
 The inference transforms are available at ResNet50_Weights.IMAGENET1K_V1.transforms and perform the following preprocessing operations: 
 Accepts PIL.Image, batched (B, C, H, W) and single (C, H, W) image torch.Tensor objects.
 The images are resized to resize_size=[256] using interpolation=InterpolationMode.BILINEAR, followed by a central crop of crop_size=[224]. 
